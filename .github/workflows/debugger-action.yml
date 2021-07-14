@@ -15,7 +15,8 @@ evn:
 
 jobs:
   job1:
-    run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
+    run:
+      echo 1
 
   job2:
     if: ${{ env.INIT_RUN == false }}
