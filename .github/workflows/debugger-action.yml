@@ -24,10 +24,10 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - name: Marked Info
+      - name: Done
         run: |
-          echo init > /init_marked
-          cat /init_marked
+          echo init > ./init_marked
+          cat ./init_marked
 
   job3:
     if: always()
@@ -36,6 +36,6 @@ jobs:
     steps:
       - name: Marked Info
         run: |
-          cat /init_marked  | wc -l >> /init_marked
-          cat /init_marked
+          cat ./init_marked  | wc -l >> ./init_marked
+          cat ./init_marked
           echo $INIT_RUN
