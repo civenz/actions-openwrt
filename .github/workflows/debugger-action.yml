@@ -20,8 +20,8 @@ jobs:
       - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
 
   job2:
+    if: (env.INIT_RUN == false)
     needs: job1
-    if: INIT_RUN == false
     runs-on: ubuntu-latest
     steps:
       - name: Disk Info
