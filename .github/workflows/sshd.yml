@@ -31,22 +31,3 @@ jobs:
         if: (github.event.inputs.ssh == 'tmate2')
         uses: mxschmitt/action-tmate@v3
         timeout-minutes: 14400
-
-      - name: ngrok - sshd
-        if: (github.event.inputs.ssh == 'ngrok')
-        
-        env:
-          ### https://dashboard.ngrok.com/get-started/your-authtoken # GET NGROK TOKEN
-          NGROK_TOKEN: 1vK9OpmKzlSYS0T4y8Lp7wkRJZz_73YoJoXvH4RoEiUq9ji3P
-
-          ### https://ngrok.com/docs#global-locations # NGROK SERVER REGION [us, eu, au, ap, sa, jp, in]
-          NGROK_REGION: ap
-
-          ### SSH 登录密码
-          SSH_PASSWORD: test-password
-          
-        run: |
-          chmod +x $NGROK_SH
-          $GITHUB_WORKSPACE/$NGROK_SH
-          sleep 24h
-
