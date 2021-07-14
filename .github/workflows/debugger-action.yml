@@ -47,5 +47,6 @@ jobs:
 
       - name: Upload File
         uses: actions/upload-artifact@v2
-        wtih: my_files
+        wtih:
+          name: my_files
           path: my_files.tar
