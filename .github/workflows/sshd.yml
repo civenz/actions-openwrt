@@ -22,7 +22,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: SSH connection to Actions
+      - name: INIT
+        run: |
+          echo $GITHUB_ACTION_PATH
+          echo $GITHUB_WORKSPACE
+
+      - name: tmate1 - sshd
         if: (github.event.inputs.ssh == 'tmate1')
         uses: csexton/debugger-action@master
 
