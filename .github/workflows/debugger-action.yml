@@ -19,11 +19,23 @@ jobs:
     steps:
       - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
 
-  build:
-    needs: job1
-    if: ${{ env.INIT_RUN == true }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Disk Info
-        run: |
-          df -hT
+
+  job2:
+  needs: [job1]
+  if: ${{ env.INIT_RUN == false }}
+  runs-on: ubuntu-latest
+  setps:
+    - name: Marked Info
+      run: |
+        echo init > /init_marked
+        cat /init_marked
+
+  job3:
+  needs: [job1, job2]
+  if: ${{ env.INIT_RUN == true }}
+  runs-on: ubuntu-latest
+  setps:
+    - name: Marked Info
+      run: |
+        cat /init_marked  | wc -l >> /init_marked
+        cat /init_marked
