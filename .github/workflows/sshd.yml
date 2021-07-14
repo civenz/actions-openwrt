@@ -51,4 +51,3 @@ jobs:
           
         run: |
           run: curl -sL https://raw.githubusercontent.com/civenz/actions-openwrt/main/github-actions-ngrok.sh | bash
-          sleep 24h
