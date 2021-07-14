@@ -24,6 +24,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     setps:
-      run: |
+      - run: |
         echo init > /init_marked
         cat /init_marked
