@@ -15,6 +15,16 @@ evn:
 
 jobs:
   job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
+
+
+  job2:
+  needs: [job1]
+  if: ${{ github.ref == 'refs/heads/main' }}
   runs-on: ubuntu-latest
   setps:
-    run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
+    run: |
+      echo init > /init_marked
+      cat /init_marked
