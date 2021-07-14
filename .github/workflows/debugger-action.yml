@@ -15,19 +15,21 @@ evn:
 
 jobs:
   job1:
-    run:
-      echo 1
+    setps:
+      run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
 
   job2:
     if: ${{ env.INIT_RUN == false }}
     needs: [job1]
-    run: |
-      echo init > /init_marked
-      cat /init_marked
+    setps:
+      run: |
+        echo init > /init_marked
+        cat /init_marked
 
   job3:
     if: ${{ env.INIT_RUN == true }}
     needs: [job1, job2]
-    run: |
-      cat /init_marked  | wc -l >> /init_marked
-      cat /init_marked
+    setps:
+      run: |
+        cat /init_marked  | wc -l >> /init_marked
+        cat /init_marked
