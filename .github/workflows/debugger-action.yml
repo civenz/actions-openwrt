@@ -19,8 +19,8 @@ jobs:
     steps:
       - run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
 
-
   build:
+    needs: job1
     if: ${{ env.INIT_RUN == true }}
     runs-on: ubuntu-latest
     steps:
