@@ -19,7 +19,7 @@ jobs:
     run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
 
   job2:
-  if: ${{ env.INIT_RUN == false }}
+  if: env.INIT_RUN == false
   needs: [job1]
   setps:
     run: |
@@ -27,7 +27,7 @@ jobs:
       cat /init_marked
 
   job3:
-  if: ${{ env.INIT_RUN == true }}
+  if: env.INIT_RUN == true
   needs: [job1, job2]
   setps:
     run: |
