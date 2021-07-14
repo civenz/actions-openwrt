@@ -6,36 +6,47 @@ on:
     inputs:
       ssh:
         description: 'SSH connection to Actions: false | tmate | ngrok'
-        required: false
+        required: true
         default: 'false'
 
+permissions: write-all
+
 env:
-  INIT_RUN: 'false'
+  INIT_RUN: false
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
+  GITHUB_TOKEN: FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
+      - run: if [ -f /init_marked ]; then echo $PATH; fi
 
   job2:
     if: always()
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - name: Done
+      - name: Marked Info
         run: |
-          echo init >> ./init_marked
+          echo init > ./init_marked
           cat ./init_marked
 
   job3:
     if: always()
     needs: [job1, job2]
     runs-on: ubuntu-latest
+
     steps:
       - name: Marked Info
         run: |
           cat ./init_marked  | wc -l >> ./init_marked
           cat ./init_marked
+          tar -cvf ./my_files.tar ./init_marked
           echo $INIT_RUN
+
+      - name: Upload File
+        uses: actions/upload-artifact@v2
+        wtih:
+          path: |
+            ./my_files.tar
