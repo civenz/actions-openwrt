@@ -1,11 +1,11 @@
-name: Debugger Action2
+name: Sshd
 
 on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok'
+        description: 'SSH connection to Actions: false | tmate | ngrok'
         required: true
         default: 'false'
 
@@ -14,20 +14,10 @@ permissions: write-all
 env:
   INIT_RUN: false
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
-  NGROK_SH: github-actions-ngrok.sh
-
+  GITHUB_TOKEN: FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 
 jobs:
-  tmate:
+  job1:
     runs-on: ubuntu-latest
-
     steps:
-      - name: tmate1 - sshd
-        if: (github.event.inputs.ssh == 'tmate1')
-        run: touch /tmp/keepalive
-        uses: csexton/debugger-action@master
-
-      - name: tmate2 - sshd
-        if: (github.event.inputs.ssh == 'tmate2')
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 14400
+      - run: if [ -f init_marked.txt ]; then echo $PATH; fi
