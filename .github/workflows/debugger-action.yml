@@ -24,7 +24,7 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - name: Done
+      - name: Marked Info
         run: |
           echo init > /init_marked
           cat /init_marked
@@ -33,7 +33,7 @@ jobs:
     if: always()
     needs: [job1, job2]
     runs-on: ubuntu-latest
-    setps:
+    steps:
       - name: Marked Info
         run: |
           cat /init_marked  | wc -l >> /init_marked
