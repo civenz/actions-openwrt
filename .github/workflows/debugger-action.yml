@@ -20,7 +20,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: if [ -f /init_marked ]; then echo $PATH; fi
+      - run: if [ -f init_marked.txt ]; then echo $PATH; fi
 
   job2:
     if: always()
@@ -29,8 +29,8 @@ jobs:
     steps:
       - name: Marked Info
         run: |
-          echo init > ./init_marked
-          cat ./init_marked
+          echo init > init_marked.txt
+          cat init_marked.txt
 
   job3:
     if: always()
@@ -40,13 +40,12 @@ jobs:
     steps:
       - name: Marked Info
         run: |
-          cat ./init_marked  | wc -l >> ./init_marked
-          cat ./init_marked
-          tar -cvf ./my_files.tar ./init_marked
+          cat init_marked.txt  | wc -l >> init_marked.txt
+          cat init_marked.txt
+          tar -cvf my_files.tar init_marked.txt
           echo $INIT_RUN
 
       - name: Upload File
         uses: actions/upload-artifact@v2
-        with:
-          path: |
-            ./my_files.tar
+        wtih: my_files
+          path: my_files.tar
