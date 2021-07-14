@@ -10,7 +10,7 @@ on:
         default: 'false'
 
 env:
-  INIT_RUN: false
+  INIT_RUN: 'false'
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
       - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
 
   job2:
-    if: ($INIT_RUN == false)
+    if: ($INIT_RUN == 'false')
     needs: job1
     runs-on: ubuntu-latest
     steps:
