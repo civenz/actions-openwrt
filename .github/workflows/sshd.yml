@@ -1,4 +1,4 @@
-name: SSHD
+name: Sshd
 
 on:
   repository_dispatch:
