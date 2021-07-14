@@ -24,8 +24,18 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-      - name: Disk Info
-        run: |
-          df -hT
       - name: Done
-        run: echo "Done"
+        run: |
+          echo init > /init_marked
+          cat /init_marked
+
+  job3:
+    if: always()
+    needs: [job1, job2]
+    runs-on: ubuntu-latest
+    setps:
+      - name: Marked Info
+        run: |
+          cat /init_marked  | wc -l >> /init_marked
+          cat /init_marked
+          echo $INIT_RUN
