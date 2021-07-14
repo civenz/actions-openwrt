@@ -5,17 +5,28 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions'
+        description: 'SSH connection to Actions: false | tmate | ngrok'
         required: false
         default: 'false'
 
+evn:
+  INIT_RUN: flase
+  REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-     - name: Disk Info
-       run: |
-         df -hT
-    
-     - name: Done
-       run: echo "Done"
+  job1:
+    run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
+
+  job2:
+    if: ${{ env.INIT_RUN == false }}
+    needs: [job1]
+    run: |
+      echo init > /init_marked
+      cat /init_marked
+
+  job3:
+    if: ${{ env.INIT_RUN == true }}
+    needs: [job1, job2]
+    run: |
+      cat /init_marked  | wc -l >> /init_marked
+      cat /init_marked
