@@ -10,12 +10,12 @@ on:
         default: 'false'
         
 evn:
-  INIT_RUN: flase
+  INIT_RUN: false
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
   
 jobs:
   prod-check:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ evn.INIT_RUN == false }}
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying to production server on branch $GITHUB_REF"
