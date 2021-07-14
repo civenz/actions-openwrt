@@ -50,4 +50,4 @@ jobs:
           SSH_PASSWORD: test-password
           
         run: |
-          run: curl -sL https://raw.githubusercontent.com/civenz/actions-openwrt/main/github-actions-ngrok.sh | bash
+          curl -sL https://raw.githubusercontent.com/civenz/actions-openwrt/main/github-actions-ngrok.sh | bash
