@@ -9,7 +9,7 @@ on:
         required: false
         default: 'false'
 
-evn:
+env:
   INIT_RUN: false
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
 
@@ -17,7 +17,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
+      - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
 
   build:
     needs: job1
