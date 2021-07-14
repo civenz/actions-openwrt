@@ -1,4 +1,4 @@
-name: Sshd
+name: Debugger Action2
 
 on:
   repository_dispatch:
@@ -7,7 +7,7 @@ on:
       ssh:
         description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok'
         required: true
-        default: 'tmate1'
+        default: 'false'
 
 permissions: write-all
 
