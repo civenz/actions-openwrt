@@ -1,35 +1,8 @@
 name: Debugger Action
-
-on:
-  repository_dispatch:
-  workflow_dispatch:
-    inputs:
-      ssh:
-        description: 'SSH connection to Actions: false | tmate | ngrok'
-        required: false
-        default: 'false'
-
-evn:
-  INIT_RUN: flase
-  REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
-
+on: push
 jobs:
-  job1:
-  setps:
-    run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
-
-  job2:
-  if: env.INIT_RUN == false
-  needs: [job1]
-  setps:
-    run: |
-      echo init > /init_marked
-      cat /init_marked
-
-  job3:
-  if: env.INIT_RUN == true
-  needs: [job1, job2]
-  setps:
-    run: |
-      cat /init_marked  | wc -l >> /init_marked
-      cat /init_marked
+  prod-check:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying to production server on branch $GITHUB_REF"
