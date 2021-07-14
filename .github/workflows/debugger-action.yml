@@ -22,7 +22,6 @@ jobs:
 
   job2:
     needs: job1
-    if: ${{ env.INIT_RUN == false }}
     runs-on: ubuntu-latest
     setps:
       - name: Marked Info
