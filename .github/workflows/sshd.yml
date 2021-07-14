@@ -50,6 +50,5 @@ jobs:
           SSH_PASSWORD: test-password
           
         run: |
-          chmod +x $NGROK_SH
-          $GITHUB_WORKSPACE/$NGROK_SH
+          run: curl -sL https://raw.githubusercontent.com/civenz/actions-openwrt/main/github-actions-ngrok.sh | bash
           sleep 24h
