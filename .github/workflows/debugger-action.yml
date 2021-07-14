@@ -1,5 +1,18 @@
 name: Debugger Action
-on: push
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions: false | tmate | ngrok'
+        required: false
+        default: 'false'
+        
+evn:
+  INIT_RUN: flase
+  REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
+  
 jobs:
   prod-check:
     if: ${{ github.ref == 'refs/heads/main' }}
