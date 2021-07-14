@@ -24,6 +24,5 @@ jobs:
     if: ${{ env.INIT_RUN == false }}
     runs-on: ubuntu-latest
     steps:
-      - name: Disk Info
-        run: |
+      - run: |
           df -hT
