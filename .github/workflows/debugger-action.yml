@@ -18,3 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
+
+  job2:
+    needs: job1
+    if: ${{ env.INIT_RUN == false }}
+    runs-on: ubuntu-latest
+    setps:
+      - name: Marked Info
+        run: |
+          echo init > /init_marked
+          cat /init_marked
