@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Done
         run: |
-          echo init > ./init_marked
+          echo init >> ./init_marked
           cat ./init_marked
 
   job3:
