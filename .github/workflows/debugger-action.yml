@@ -1,3 +1,5 @@
+name: Debugger Action
+
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -15,7 +17,7 @@ jobs:
        uses: actions/checkout@main
 
      - name: SSH connection to Actions
-       user: P3TERX/ssh2actions@v1.0.0
+       uses: P3TERX/ssh2actions@v1.0.0
        if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
        env:
          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
