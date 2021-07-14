@@ -50,3 +50,12 @@ jobs:
         with:
           name: my_files
           path: my_files.tar
+
+      - name: Upload firmware to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: test_v1
+          body_path: init_marked.txt
+          files: my_files.tar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
