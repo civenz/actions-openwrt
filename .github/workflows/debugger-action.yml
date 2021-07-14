@@ -15,5 +15,6 @@ evn:
 
 jobs:
   job1:
+  runs-on: ubuntu-latest
   setps:
     run: if [ -f /init_marked ]; then evn.INIT_RUN=true; fi
