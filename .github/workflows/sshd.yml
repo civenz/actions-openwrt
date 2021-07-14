@@ -1,26 +1,50 @@
-name: Sshd
+name: SSHD
 
 on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions: false | tmate | ngrok'
+        description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok'
         required: true
-        default: 'false'
+        default: 'tmate1'
 
 permissions: write-all
 
 env:
   INIT_RUN: false
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
-  GITHUB_TOKEN: FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+  NGROK_SH: github-actions-ngrok.sh
+
 
 jobs:
-  job1:
+  tmate:
     runs-on: ubuntu-latest
+
     steps:
-      - name: tmate1 - sshd
+      - name: SSH connection to Actions
         if: (github.event.inputs.ssh == 'tmate1')
-        run: touch /tmp/keepalive
         uses: csexton/debugger-action@master
+
+      - name: tmate2 - sshd
+        if: (github.event.inputs.ssh == 'tmate2')
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 14400
+
+      - name: ngrok - sshd
+        if: (github.event.inputs.ssh == 'ngrok')
+        
+        env:
+          ### https://dashboard.ngrok.com/get-started/your-authtoken # GET NGROK TOKEN
+          NGROK_TOKEN: 1vK9OpmKzlSYS0T4y8Lp7wkRJZz_73YoJoXvH4RoEiUq9ji3P
+
+          ### https://ngrok.com/docs#global-locations # NGROK SERVER REGION [us, eu, au, ap, sa, jp, in]
+          NGROK_REGION: ap
+
+          ### SSH 登录密码
+          SSH_PASSWORD: test-password
+          
+        run: |
+          chmod +x $NGROK_SH
+          $GITHUB_WORKSPACE/$NGROK_SH
+          sleep 24h
