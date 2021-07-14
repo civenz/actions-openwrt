@@ -20,7 +20,7 @@ jobs:
       - run: if [ -f /init_marked ]; then env.INIT_RUN=true; fi
 
   job2:
-    if: ($REPO_BRANCH == false)
+    if: ($INIT_RUN == false)
     needs: job1
     runs-on: ubuntu-latest
     steps:
