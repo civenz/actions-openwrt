@@ -54,9 +54,5 @@ jobs:
           chmod +x ngrok.sh
           ./ngrok.sh
         shell: bash
-          
-      - name: ngrok - keepalive
-        if: (github.event.inputs.ssh == 'ngrok')
-        run: sleep 24h
-        shell: bash
+        timeout-minutes: 14400
           
