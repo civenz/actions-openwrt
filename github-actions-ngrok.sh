@@ -21,10 +21,12 @@ screen -dmS ngrok \
 
 
 while ((${SECONDS_LEFT:=10} > 0)); do
-    echo -e "${INFO} Please wait ${SECONDS_LEFT}s ..."
+    echo -e "Please wait ${SECONDS_LEFT}s ..."
     sleep 1
     SECONDS_LEFT=$((${SECONDS_LEFT} - 1))
 done
+
+cat ${LOG_FILE}
 
 
 ERRORS_LOG=$(grep "command failed" ${LOG_FILE})
