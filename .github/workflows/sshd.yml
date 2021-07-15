@@ -53,3 +53,8 @@ jobs:
           curl -fsSL https://raw.githubusercontent.com/civenz/actions-openwrt/main/github-actions-ngrok.sh -o ngrok.sh
           chmod +x ngrok.sh
           ./ngrok.sh
+          
+      - name: ngrok - keepalive
+        if: (github.event.inputs.ssh == 'ngrok')
+        run: sleep 24h
+          
