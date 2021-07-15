@@ -8,7 +8,7 @@ chmod +x ngrok
 sudo mv ngrok /usr/local/bin
 
 rm -f ngrok.zip
-rm -f ${LOG_FILE}
+cat /dev/null > ${LOG_FILE}
 
 echo -e "$SSH_PASSWORD\n$SSH_PASSWORD" | sudo passwd "$USER"
 
