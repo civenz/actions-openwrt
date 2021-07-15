@@ -16,7 +16,7 @@ echo "================================================================"
 echo $USER $SSH_PASSWORD
 echo "================================================================"
 
-ngrok tcp 22 --authtoken "${NGROK_TOKEN}" --region "${NGROK_REGION}" --log "${LOG_FILE}"
+ngrok tcp 22 --authtoken "${NGROK_TOKEN}" --region "${NGROK_REGION}" --log "${LOG_FILE}" &
 # ngrok tcp 22 --authtoken "1vK9OpmKzlSYS0T4y8Lp7wkRJZz_73YoJoXvH4RoEiUq9ji3P" --region "ap" --log "/tmp/ngrok.log"
 
 while ((${SECONDS_LEFT:=10} > 0)); do
