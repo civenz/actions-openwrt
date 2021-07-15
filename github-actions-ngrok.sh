@@ -12,12 +12,12 @@ cat /dev/null > ${LOG_FILE}
 
 echo -e "$SSH_PASSWORD\n$SSH_PASSWORD" | sudo passwd "$USER"
 
+echo "================================================================"
+echo $USER $SSH_PASSWORD
+echo "================================================================"
 
-ngrok tcp 22 \
-    --log "${LOG_FILE}" \
-    --authtoken "${NGROK_TOKEN}" \
-    --region "${NGROK_REGION:-us}" &
-
+ngrok ngrok tcp 22 --authtoken "${NGROK_TOKEN}" --region "${NGROK_REGION}" --log "${LOG_FILE}"
+# ngrok tcp 22 --authtoken "1vK9OpmKzlSYS0T4y8Lp7wkRJZz_73YoJoXvH4RoEiUq9ji3P" --region "ap" --log "/tmp/ngrok.log"
 
 while ((${SECONDS_LEFT:=10} > 0)); do
     echo -e "Please wait ${SECONDS_LEFT}s ..."
@@ -34,7 +34,7 @@ ERRORS_LOG=$(grep "command failed" ${LOG_FILE})
 if [[ -e "${LOG_FILE}" && -z "${ERRORS_LOG}" ]]; then
   echo ""
   echo "=========================================="
-  echo "To connect: $(grep -o -E "tcp://(.+)" < .ngrok.log | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")"
+  echo "To connect: $(grep -o -E "tcp://(.+)" < ${LOG_FILE} | sed "s/tcp:\/\//ssh $USER@/" | sed "s/:/ -p /")"
   echo "=========================================="
 else
   echo "$HAS_ERRORS"
