@@ -56,5 +56,5 @@ jobs:
         shell: bash
         
       - name: ngrok - sleep
-        run: sleep 14400
+        run: sleep 20
           
