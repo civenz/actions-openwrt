@@ -24,6 +24,7 @@ jobs:
 
     steps:
       - name: INIT
+        working-directory: /workdir
         run: |
           sudo mkdir -p /workdir
           sudo chown $USER:$GROUPS /workdir
@@ -31,7 +32,6 @@ jobs:
           
       - name: Run Shell
         if: (github.event.inputs.ssh == 'shell')
-        working-directory: /workdir
         run: |
           echo "hello shell!"
           echo $PWD
@@ -80,3 +80,5 @@ jobs:
           name: my_files
           path: my_files.tar.gz
           
+      - name: Done
+        run: echo $GITHUB_WORKSPACE
