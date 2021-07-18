@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok'
+        description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok | shell'
         required: true
         default: 'tmate1'
 
@@ -24,7 +24,15 @@ jobs:
     steps:
       - name: INIT
         run: |
-          echo $GITHUB_ACTION_PATH
+          sudo mkdir -p /workdir
+          sudo chown $USER:$GROUPS /workdir
+          
+      - name: Run Shell
+        if: (github.event.inputs.ssh == 'shell')
+        run: |
+          echo "hello shell!"
+          echo $PWD
+          sh $GITHUB_WORKSPACE/$RUN_SH
           echo $GITHUB_WORKSPACE
 
       - name: tmate1 - sshd
