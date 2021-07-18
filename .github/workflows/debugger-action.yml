@@ -49,13 +49,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my_files
-          path: my_files.tar
+          path: my_files.tar.gz
 
       - name: Upload firmware to release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: test_v1
           body_path: init_marked.txt
-          files: my_files.tar
+          files: my_files.tar.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
