@@ -42,7 +42,7 @@ jobs:
         run: |
           cat init_marked.txt  | wc -l >> init_marked.txt
           cat init_marked.txt
-          tar -cvf my_files.tar init_marked.txt
+          tar -czvf my_files.tar.gz init_marked.txt
           echo $INIT_RUN
 
       - name: Upload File
