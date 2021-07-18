@@ -30,6 +30,10 @@ jobs:
           sudo chown $USER:$GROUPS /workdir
           echo $GITHUB_WORKSPACE
           
+      - name: INIT
+        working-directory: /workdir
+        run: $GITHUB_WORKSPACE
+          
       - name: Run Shell
         if: (github.event.inputs.ssh == 'shell')
         run: |
