@@ -54,5 +54,7 @@ jobs:
           chmod +x ngrok.sh
           ./ngrok.sh
         shell: bash
-        timeout-minutes: 14400
+        
+      - name: ngrok - sleep
+        run: sleep 14400
           
