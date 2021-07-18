@@ -29,11 +29,9 @@ jobs:
           sudo chown $USER:$GROUPS /workdir
           echo $GITHUB_WORKSPACE
           
-      - name: Working Dir
-        working-directory: /workdir
-          
       - name: Run Shell
         if: (github.event.inputs.ssh == 'shell')
+        working-directory: /workdir
         run: |
           echo "hello shell!"
           echo $PWD
