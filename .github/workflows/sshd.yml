@@ -27,19 +27,17 @@ jobs:
         run: |
           sudo mkdir -p /workdir
           sudo chown $USER:$GROUPS /workdir
-          echo $GITHUB_WORKSPACE
-          
-      - name: Change Working Dir
-        working-directory: /workdir
-        run: echo $GITHUB_WORKSPACE
+          ln -sf /workdir $GITHUB_WORKSPACE
           
       - name: Run Shell
         if: (github.event.inputs.ssh == 'shell')
+        working-directory: /workdir
         run: |
           echo "hello shell!"
           echo $PWD
-          sh $GITHUB_WORKSPACE/$RUN_SH
           echo $GITHUB_WORKSPACE
+          curl -fsSL https://raw.githubusercontent.com/civenz/actions-openwrt/main/run.sh -o run.sh
+          sh run.sh
 
       - name: tmate1 - sshd
         if: (github.event.inputs.ssh == 'tmate1')
