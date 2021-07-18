@@ -8,6 +8,11 @@ on:
         description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok | shell'
         required: true
         default: 'shell'
+      uploadfile:
+        description: 'Upload File: y/n'
+        required: false
+        default: ''
+
 
 permissions: write-all
 
@@ -63,19 +68,16 @@ jobs:
           
         run: |
           curl -fsSL https://raw.githubusercontent.com/civenz/actions-openwrt/main/github-actions-ngrok.sh -o ngrok.sh
-          chmod +x ngrok.sh
-          ./ngrok.sh
+          chmod +x ngrok.sh && ./ngrok.sh
         shell: bash
         
       - name: ngrok - sleep
         if: (github.event.inputs.ssh == 'ngrok')
         run: |
-          sleep 1200
-          cp /home/runner/openwrt-sdk/bin/packages/x86_64/base/luci-app-xray_1.0.10-1_x86_64.ipk luci-app-xray_1.0.10-1_x86_64.ipk
-          tar -czvf my_files.tar.gz luci-app-xray_1.0.10-1_x86_64.ipk
+          sleep 14400
         
       - name: Upload File
-        if: (github.event.inputs.ssh == 'ngrok')
+        if: (github.event.inputs.uploadfile == 'y')
         uses: actions/upload-artifact@v2
         with:
           name: my_files
