@@ -8,6 +8,10 @@ on:
         description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok | shell'
         required: true
         default: 'shell'
+      ngrok_token:
+        description: 'ngrok token'
+        required: false
+        default: ''
       uploadfile:
         description: 'Upload File: y/n'
         required: false
@@ -58,7 +62,7 @@ jobs:
         
         env:
           ### https://dashboard.ngrok.com/get-started/your-authtoken # GET NGROK TOKEN
-          NGROK_TOKEN: 1vK9OpmKzlSYS0T4y8Lp7wkRJZz_73YoJoXvH4RoEiUq9ji3P
+          NGROK_TOKEN: github.event.inputs.ngrok_token
 
           ### https://ngrok.com/docs#global-locations # NGROK SERVER REGION [us, eu, au, ap, sa, jp, in]
           NGROK_REGION: ap
