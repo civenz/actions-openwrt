@@ -7,7 +7,7 @@ on:
       ssh:
         description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok | shell'
         required: true
-        default: 'tmate1'
+        default: 'shell'
 
 permissions: write-all
 
@@ -29,9 +29,9 @@ jobs:
           sudo chown $USER:$GROUPS /workdir
           echo $GITHUB_WORKSPACE
           
-      - name: INIT
+      - name: Change Working Dir
         working-directory: /workdir
-        run: $GITHUB_WORKSPACE
+        run: echo $GITHUB_WORKSPACE
           
       - name: Run Shell
         if: (github.event.inputs.ssh == 'shell')
