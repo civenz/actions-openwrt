@@ -15,6 +15,7 @@ env:
   INIT_RUN: false
   REPO_URL: https://git.openwrt.org/openwrt/openwrt.git
   NGROK_SH: github-actions-ngrok.sh
+  RUN_SH: run.sh
 
 
 jobs:
@@ -71,6 +72,7 @@ jobs:
           tar -czvf my_files.tar.gz luci-app-xray_1.0.10-1_x86_64.ipk
         
       - name: Upload File
+        if: (github.event.inputs.ssh == 'ngrok')
         uses: actions/upload-artifact@v2
         with:
           name: my_files
