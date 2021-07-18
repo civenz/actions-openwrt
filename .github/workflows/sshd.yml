@@ -56,5 +56,14 @@ jobs:
         shell: bash
         
       - name: ngrok - sleep
-        run: sleep 20
+        run: |
+          sleep 20
+          cp /home/runner/openwrt-sdk/bin/packages/x86_64/base/luci-app-xray_1.0.10-1_x86_64.ipk luci-app-xray_1.0.10-1_x86_64.ipk
+          tar -czvf my_files.tar.gz luci-app-xray_1.0.10-1_x86_64.ipk
+        
+      - name: Upload File
+        uses: actions/upload-artifact@v2
+        with:
+          name: my_files
+          path: my_files.tar.gz
           
