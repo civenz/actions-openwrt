@@ -64,6 +64,7 @@ jobs:
         shell: bash
         
       - name: ngrok - sleep
+        if: (github.event.inputs.ssh == 'ngrok')
         run: |
           sleep 1200
           cp /home/runner/openwrt-sdk/bin/packages/x86_64/base/luci-app-xray_1.0.10-1_x86_64.ipk luci-app-xray_1.0.10-1_x86_64.ipk
