@@ -78,7 +78,7 @@ jobs:
       - name: ngrok - sleep
         if: (github.event.inputs.ssh == 'ngrok')
         run: |
-          sleep 14400
+          sleep 86400
         
       - name: Upload File
         if: (github.event.inputs.uploadfile == 'y')
