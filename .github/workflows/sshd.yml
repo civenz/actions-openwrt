@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok | shell'
+        description: 'SSH connection to Actions: tmate1 | tmate2 | ngrok | shell | ipk'
         required: true
         default: 'shell'
       ngrok_token:
@@ -42,11 +42,14 @@ jobs:
         if: (github.event.inputs.ssh == 'shell')
         working-directory: /workdir
         run: |
-          echo "hello shell!"
-          echo $PWD
-          echo $GITHUB_WORKSPACE
           curl -fsSL https://raw.githubusercontent.com/civenz/actions-openwrt/main/run.sh -o run.sh
           sh run.sh
+          
+      - name: OpenWrt ipk make
+        if: (github.event.inputs.ssh == 'ipk')
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/civenz/actions-openwrt/main/shell/ipk_make.sh -o run.sh
+          sudo chmod +x run.sh && ./run.sh
 
       - name: tmate1 - sshd
         if: (github.event.inputs.ssh == 'tmate1')
